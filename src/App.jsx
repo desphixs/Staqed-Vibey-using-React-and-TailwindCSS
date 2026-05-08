@@ -45,7 +45,38 @@ const App = () => {
   };
 
   return (
-    <div className="text-indigo-500 text-4xl font-bold text-center w-full h-screen flex items-center justify-center">Project</div>
+    // We use a template literal (backticks) to inject our dynamic color class.
+    // 'transition-all duration-700' makes the color change smooth and dreamy.
+    <div className={`h-screen transition-all duration-700 flex flex-col items-center justify-center p-6 ${currentVibe.color}`}>
+      
+      {/* Centered Mood Display */}
+      <div className="text-center mb-12">
+        {/* We display the current emoji in a massive size */}
+        <h1 className="text-9xl mb-4 drop-shadow-2xl">
+          {currentVibe.emoji}
+        </h1>
+        {/* We display the advice text and dynamically change its color for contrast */}
+        <p className={`text-2xl font-bold tracking-tight ${currentVibe.textColor}`}>
+          {currentVibe.advice}
+        </p>
+      </div>
+
+      {/* Button Selection Area */}
+      <div className="flex flex-wrap justify-center gap-4 max-w-2xl">
+        {/* We turn our VIBES object into an array so we can 'map' through it. */}
+        {/* This creates one VibeButton for every single vibe we defined earlier! */}
+        {Object.entries(VIBES).map(([key, vibe]) => (
+          <VibeButton
+            key={key} // React needs a unique key for list items
+            label={key} // The name of the vibe (productive, chilled, etc.)
+            emoji={vibe.emoji} // The emoji for that vibe
+            textColor={currentVibe.textColor} // Pass the color that matches the current background!
+            onClick={() => handleVibeChange(vibe)} // When clicked, tell the brain to change!
+          />
+        ))}
+      </div>
+
+    </div>
   )
 }
 
