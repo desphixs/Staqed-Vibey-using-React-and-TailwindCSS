@@ -1,4 +1,6 @@
 import React from 'react'
+// Import our reusable VibeButton component from its own file
+import VibeButton from './components/VibeButton'
 
 const VIBES = {
   productive: {
